@@ -7,6 +7,7 @@ USE portermarket;
 -- 해당 테이블이 이미 존재하면 삭제하겠다!
 drop table if exists user;
 drop table if exists goods;
+drop table if exists situationKeyword;
 
 -- 1) 회원 테이블 생성
 CREATE TABLE user
@@ -24,15 +25,15 @@ select * from user;
 CREATE TABLE goods
 (
 	goodsKey INT AUTO_INCREMENT PRIMARY KEY,
-    goodsCateKey INT NOT NULL,
+    ratingCount Float NULL,
     ASIN VARCHAR(30) NOT NULL,
-    goodsName VARCHAR(150) NOT NULL,
-    brand VARCHAR(30) NULL,
+    goodsName VARCHAR(300) NOT NULL,
+    brand VARCHAR(50) NULL,
     originalPrice INT NOT NULL,
     discountedPrice INT NOT NULL,
     ratingAvg FLOAT NULL,
-    goodsInfo VARCHAR(150) NULL,
-    goodsDesc VARCHAR(150) NULL,
+    goodsInfo TEXT NULL,
+    goodsDesc TEXT NULL,
     category1 VARCHAR(30) NOT NULL,
     category2 VARCHAR(30) NOT NULL,
     category3 VARCHAR(30) NOT NULL
@@ -119,6 +120,8 @@ ADD COLUMN is_staff BOOLEAN DEFAULT FALSE,
 ADD COLUMN is_active BOOLEAN DEFAULT TRUE,
 ADD COLUMN date_joined DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE goods ADD COLUMN goodsImg VARCHAR(500);
+
 desc user;
 
 ALTER TABLE user ADD COLUMN password VARCHAR(128);
@@ -139,13 +142,7 @@ CREATE TABLE user_user_permissions (
     FOREIGN KEY (permission_id) REFERENCES auth_permission(id)
 );
 
-CREATE TABLE goodsKeyword
-(
-    goodsKwKey INT AUTO_INCREMENT PRIMARY KEY,
-    ASIN VARCHAR(30) NOT NULL,
-    goodsKeyword VARCHAR(30) NOT NULL,
-    FOREIGN KEY (ASIN) REFERNECES goods(ASIN)
-);
-desc goodsKeyword;
-insert into goodsKeyword values (1,’B0BPWV9QNN’,’키워드’);
-select * from goodsKeyword;
+desc orders;
+
+select * from user;
+select userpwd from user where user_id=7

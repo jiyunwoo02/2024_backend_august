@@ -6,7 +6,6 @@ from rest_framework import viewsets, filters
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-
 # 사용자
 from django.contrib.auth import authenticate, login
 from .models import User
@@ -107,3 +106,5 @@ class GoodsViewSet(viewsets.ModelViewSet):
 class OrdersViewSet(viewsets.ModelViewSet):
     queryset = Orders.objects.all()
     serializer_class = OrdersSerializer
+
+# 추천 API: pickle 파일 사용
